@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Net Zero Platforms — Waste to Value Technology</title>
+<meta name="description" content="NZP uses your actual waste data to model what high-value products your streams could generate — hydrogen, SAF, syngas — and the economics behind them. Model first, invest later.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script>
+  var NZP_CALENDLY_URL = 'https://calendly.com/YOUR_CALENDLY_URL';
+  function openCalendly(e){ e.preventDefault(); Calendly.initPopupWidget({url: NZP_CALENDLY_URL}); }
+</script>
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; background: #fff; }
+img, svg { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ========== UTILITY ========== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-lg { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+.section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #0ea5e9; margin-bottom: 12px; }
+.section-label-light { color: #7dd3fc; }
+.section-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.section-sub { font-size: 1.125rem; color: #64748b; max-width: 640px; line-height: 1.7; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 600; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; transition: all 0.2s ease; }
+.btn-primary { background: #d97706; color: #fff; }
+.btn-primary:hover { background: #b45309; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(217,119,6,0.4); }
+.btn-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+.btn-nav { background: #d97706; color: #fff; font-size: 0.875rem; padding: 10px 20px; border-radius: 8px; }
+.btn-nav:hover { background: #b45309; }
+
+/* ========== NAV ========== */
+.nav { position: sticky; top: 0; z-index: 1000; background: #fff; height: 96px; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+.nav-brand { display: flex; align-items: center; flex-shrink: 0; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger { display: flex; align-items: center; gap: 4px; padding: 10px 16px; font-size: 0.9rem; font-weight: 500; color: #475569; cursor: pointer; border-radius: 8px; transition: background 0.15s; border: none; background: none; font-family: inherit; }
+.nav-dropdown-trigger:hover { background: #f1f5f9; color: #0f172a; }
+.nav-dropdown-trigger svg { width: 16px; height: 16px; transition: transform 0.2s; }
+.nav-dropdown:hover .nav-dropdown-trigger svg { transform: rotate(180deg); }
+.nav-dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 220px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); padding: 8px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: all 0.2s ease; }
+.nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown-menu a { display: block; padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; color: #334155; transition: background 0.15s; }
+.nav-dropdown-menu a:hover { background: #f0f9ff; color: #0369a1; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+
+/* Mobile nav */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.nav-toggle svg { width: 28px; height: 28px; color: #334155; }
+@media (max-width: 1024px) {
+  .nav-links, .nav-actions { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links { display: flex; flex-direction: column; position: absolute; top: 96px; left: 0; right: 0; background: #fff; padding: 16px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); align-items: stretch; }
+  .nav.open .nav-actions { display: flex; position: absolute; top: calc(96px + var(--links-h, 200px)); left: 0; right: 0; background: #fff; padding: 0 24px 16px; }
+  .nav-dropdown-menu { position: static; box-shadow: none; opacity: 1; visibility: visible; transform: none; padding-left: 16px; display: none; }
+  .nav-dropdown.open .nav-dropdown-menu { display: block; }
+}
+
+/* ========== HERO ========== */
+.hero { min-height: 100vh; background: linear-gradient(160deg, #0f172a 0%, #0c4a6e 55%, #0d5a8e 100%); position: relative; display: flex; align-items: center; overflow: hidden; }
+.hero::before { content: ''; position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%); top: 50%; left: 30%; transform: translate(-50%, -50%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%); top: 20%; right: 5%; pointer-events: none; }
+.hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 120px 0 80px; }
+.hero-text h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 24px; }
+.hero-text h1 em { font-style: italic; color: #7dd3fc; }
+.hero-text p { font-size: 1.2rem; color: #cbd5e1; line-height: 1.75; margin-bottom: 40px; max-width: 540px; }
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-mockup { position: relative; }
+.hero-mockup-card { background: rgba(255,255,255,0.07); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; color: #fff; }
+.mockup-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+.mockup-dot-r { background: #ef4444; }
+.mockup-dot-y { background: #eab308; }
+.mockup-dot-g { background: #22c55e; }
+.mockup-title { font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-left: 8px; }
+.mockup-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+.mockup-row:last-child { border-bottom: none; }
+.mockup-label { color: #94a3b8; }
+.mockup-value { color: #7dd3fc; font-weight: 600; }
+.mockup-value.green { color: #4ade80; }
+.mockup-bar { margin-top: 20px; background: rgba(255,255,255,0.06); border-radius: 8px; height: 8px; overflow: hidden; }
+.mockup-bar-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #0ea5e9, #22d3ee); width: 76%; }
+
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 100px 0 60px; }
+  .hero-mockup { order: -1; }
+}
+
+/* ========== TRUST BAR ========== */
+.trust-bar { background: #0f172a; padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.trust-bar-inner { text-align: center; color: #64748b; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; }
+.trust-bar-inner span { color: #94a3b8; font-weight: 600; }
+
+/* ========== INTRO STRIP ========== */
+.intro-strip { background: linear-gradient(135deg, #0369a1, #0ea5e9); padding: 80px 0; text-align: center; }
+.intro-strip h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); color: #fff; font-weight: 800; max-width: 800px; margin: 0 auto 16px; line-height: 1.3; }
+.intro-strip p { color: #e0f2fe; font-size: 1.1rem; max-width: 640px; margin: 0 auto; line-height: 1.7; }
+
+/* ========== PLATFORM ========== */
+.platform { min-height: 100vh; padding: 100px 0; display: flex; align-items: center; }
+.platform-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
+.step { display: flex; gap: 20px; margin-bottom: 36px; }
+.step-num { width: 44px; height: 44px; min-width: 44px; border-radius: 12px; background: #f0f9ff; color: #0369a1; font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+.step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #0f172a; }
+.step p { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
+.commercial-panel { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 16px; padding: 36px; }
+.commercial-panel h3 { font-size: 1.25rem; font-weight: 700; color: #0c4a6e; margin-bottom: 20px; }
+.commercial-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #e0f2fe; }
+.commercial-row:last-child { border-bottom: none; }
+.commercial-row .label { font-size: 0.9rem; color: #475569; }
+.commercial-row .value { font-size: 0.95rem; font-weight: 700; color: #0369a1; }
+@media (max-width: 768px) { .platform-grid { grid-template-columns: 1fr; } }
+
+/* ========== OUTPUTS ========== */
+.outputs { min-height: 100vh; background: #f8fafc; padding: 100px 0; display: flex; align-items: center; }
+.outputs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.output-card { background: #fff; border-radius: 16px; padding: 32px 24px; border: 1px solid #e2e8f0; transition: all 0.25s; text-align: center; }
+.output-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); border-color: #bae6fd; }
+.output-icon { width: 56px; height: 56px; border-radius: 14px; background: #f0f9ff; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #0ea5e9; }
+.output-icon svg { width: 28px; height: 28px; }
+.output-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+.output-card p { font-size: 0.9rem; color: #64748b; line-height: 1.6; }
+@media (max-width: 768px) { .outputs-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .outputs-grid { grid-template-columns: 1fr; } }
+
+/* ========== PHASES ========== */
+.phases { min-height: 100vh; padding: 100px 0; display: flex; align-items: center; }
+.phases-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.phase-card { background: #fff; border-radius: 16px; padding: 32px 24px; border: 1px solid #e2e8f0; position: relative; overflow: hidden; transition: all 0.25s; }
+.phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #0ea5e9, #22d3ee); }
+.phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.phase-num { font-size: 0.75rem; font-weight: 700; color: #0ea5e9; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+.phase-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+.phase-card p { font-size: 0.9rem; color: #64748b; line-height: 1.6; }
+@media (max-width: 768px) { .phases-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .phases-grid { grid-template-columns: 1fr; } }
+
+/* ========== WHY THIS APPROACH ========== */
+.why { min-height: 100vh; padding: 100px 0; display: flex; align-items: center; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+.why-box { border-radius: 16px; padding: 40px; }
+.why-box.old { background: #fef2f2; border: 1px solid #fecaca; }
+.why-box.new { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.why-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+.why-box.old h3 { color: #991b1b; }
+.why-box.new h3 { color: #166534; }
+.why-box ul { display: flex; flex-direction: column; gap: 14px; }
+.why-box li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: #475569; line-height: 1.5; }
+.why-box li svg { width: 20px; height: 20px; min-width: 20px; margin-top: 2px; }
+.why-box.old li svg { color: #dc2626; }
+.why-box.new li svg { color: #16a34a; }
+@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+
+/* ========== WHO IT'S FOR ========== */
+.who { min-height: 100vh; background: #f8fafc; padding: 100px 0; display: flex; align-items: center; }
+.who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.who-card { background: #fff; border-radius: 16px; padding: 36px 28px; border: 1px solid #e2e8f0; transition: all 0.25s; }
+.who-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.who-icon { width: 52px; height: 52px; border-radius: 14px; background: #f0f9ff; display: flex; align-items: center; justify-content: center; color: #0ea5e9; margin-bottom: 20px; }
+.who-icon svg { width: 26px; height: 26px; }
+.who-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+.who-card p { font-size: 0.95rem; color: #64748b; line-height: 1.6; }
+@media (max-width: 768px) { .who-grid { grid-template-columns: 1fr; } }
+
+/* ========== TRACK RECORD ========== */
+.track { min-height: 100vh; padding: 100px 0; display: flex; flex-direction: column; justify-content: center; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.stat-card { text-align: center; padding: 32px 20px; border-radius: 16px; background: #f8fafc; border: 1px solid #e2e8f0; }
+.stat-card .num { font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, #0369a1, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
+.stat-card .label { font-size: 0.9rem; color: #64748b; font-weight: 500; }
+.validation-strip { background: #0f172a; border-radius: 16px; padding: 40px 48px; margin-top: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.validation-strip h3 { font-size: 1.25rem; font-weight: 700; color: #fff; max-width: 400px; }
+.validation-strip p { font-size: 0.95rem; color: #94a3b8; max-width: 500px; line-height: 1.6; }
+@media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+
+/* ========== CREDIBILITY ========== */
+.credibility { min-height: 100vh; background: #0f172a; padding: 100px 0; display: flex; align-items: center; color: #fff; }
+.cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.cred-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 24px; transition: all 0.25s; }
+.cred-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.cred-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(14,165,233,0.15); display: flex; align-items: center; justify-content: center; color: #7dd3fc; margin-bottom: 16px; }
+.cred-icon svg { width: 24px; height: 24px; }
+.cred-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.cred-card p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+@media (max-width: 768px) { .cred-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .cred-grid { grid-template-columns: 1fr; } }
+
+/* ========== TECHNOLOGY ========== */
+.technology { min-height: 100vh; padding: 100px 0; display: flex; flex-direction: column; justify-content: center; }
+.temp-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+.temp-card { border-radius: 16px; padding: 40px; text-align: center; }
+.temp-card.conventional { background: #fef3c7; border: 1px solid #fde68a; }
+.temp-card.plasma { background: #f0f9ff; border: 1px solid #bae6fd; }
+.temp-card .temp { font-size: 3rem; font-weight: 900; margin-bottom: 4px; }
+.temp-card.conventional .temp { color: #92400e; }
+.temp-card.plasma .temp { color: #0369a1; }
+.temp-card .desc { font-size: 0.95rem; color: #64748b; }
+.cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.cap-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px 20px; text-align: center; transition: all 0.25s; }
+.cap-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.cap-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #0f172a; }
+.cap-card p { font-size: 0.85rem; color: #64748b; line-height: 1.5; }
+.delivery-chain { background: #0f172a; border-radius: 16px; padding: 40px; margin-top: 48px; text-align: center; }
+.delivery-chain h3 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 24px; }
+.chain-steps { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.chain-step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 24px; color: #e2e8f0; font-size: 0.9rem; font-weight: 600; }
+.chain-arrow { color: #0ea5e9; font-size: 1.25rem; }
+@media (max-width: 768px) {
+  .temp-compare { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: 1fr 1fr; }
+  .chain-steps { flex-direction: column; }
+  .chain-arrow { transform: rotate(90deg); }
+}
+
+/* ========== COMMERCIALS ========== */
+.commercials { min-height: 100vh; background: #f8fafc; padding: 100px 0; display: flex; align-items: center; }
+.moat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.moat-card { background: #fff; border-radius: 16px; padding: 32px 24px; border: 1px solid #e2e8f0; text-align: center; transition: all 0.25s; }
+.moat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.moat-icon { width: 52px; height: 52px; border-radius: 14px; background: #fffbeb; display: flex; align-items: center; justify-content: center; color: #d97706; margin: 0 auto 16px; }
+.moat-icon svg { width: 26px; height: 26px; }
+.moat-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+.moat-card p { font-size: 0.9rem; color: #64748b; line-height: 1.6; }
+@media (max-width: 768px) { .moat-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .moat-grid { grid-template-columns: 1fr; } }
+
+/* ========== CTA ========== */
+.cta-section { min-height: 60vh; background: linear-gradient(160deg, #0f172a 0%, #0c4a6e 100%); padding: 100px 0; display: flex; align-items: center; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.cta-inner { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+.cta-inner h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+.cta-inner p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 40px; line-height: 1.7; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ========== FOOTER ========== */
+.footer { background: #0f172a; padding: 80px 0 40px; color: #94a3b8; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.7; margin-top: 16px; max-width: 300px; }
+.footer h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; margin-bottom: 16px; }
+.footer ul { display: flex; flex-direction: column; gap: 10px; }
+.footer ul a { font-size: 0.9rem; color: #94a3b8; transition: color 0.15s; }
+.footer ul a:hover { color: #7dd3fc; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <svg width="260" height="56" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dot ring icon -->
+        <circle cx="28" cy="28" r="3.5" fill="#0ea5e9"/>
+        <circle cx="28" cy="10" r="3" fill="#0284c7"/>
+        <circle cx="40.7" cy="14.3" r="3" fill="#0369a1"/>
+        <circle cx="46" cy="28" r="3" fill="#059669"/>
+        <circle cx="40.7" cy="41.7" r="3" fill="#10b981"/>
+        <circle cx="28" cy="46" r="3" fill="#34d399"/>
+        <circle cx="15.3" cy="41.7" r="3" fill="#6ee7b7"/>
+        <circle cx="10" cy="28" r="3" fill="#22d3ee"/>
+        <circle cx="15.3" cy="14.3" r="3" fill="#38bdf8"/>
+        <!-- Text -->
+        <text x="60" y="24" font-family="Inter, sans-serif" font-size="16" font-weight="800" fill="#0f172a">Net Zero Platforms</text>
+        <text x="60" y="38" font-family="Inter, sans-serif" font-size="7.5" font-weight="700" fill="#64748b" letter-spacing="1.5">WASTE TO VALUE TECHNOLOGY</text>
+        <text x="60" y="50" font-family="Inter, sans-serif" font-size="6.5" font-weight="600" fill="#94a3b8" letter-spacing="1.2">MODEL FIRST · INVEST LATER</text>
+      </svg>
+    </a>
+
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">Platform <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="#how-it-works">Platform</a>
+          <a href="#outputs">Outputs</a>
+          <a href="#phases">How We Work</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">Why NZP <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="#why-this-works">Why This Approach</a>
+          <a href="#who-its-for">Who It's For</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">Proof <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="#track-record">Track Record</a>
+          <a href="#credibility">Independent Validation</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">Technology <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="#technology">The Technology</a>
+          <a href="#commercials">Commercials</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <a href="#" class="btn btn-nav" onclick="openCalendly(event)">Book Demo &rarr;</a>
+    </div>
+
+    <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <div class="container-lg hero-inner">
+    <div class="hero-text">
+      <h1>Unlock the untapped value <em>in your waste streams.</em></h1>
+      <p>NZP uses your actual waste data to model what high-value products your streams could generate — hydrogen, SAF, syngas — and the economics behind them. Model first, invest later.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary" onclick="openCalendly(event)">Book a Demo &rarr;</a>
+        <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-mockup">
+      <div class="hero-mockup-card">
+        <div class="mockup-header">
+          <span class="mockup-dot mockup-dot-r"></span>
+          <span class="mockup-dot mockup-dot-y"></span>
+          <span class="mockup-dot mockup-dot-g"></span>
+          <span class="mockup-title">NZP Digital Model — Site Analysis</span>
+        </div>
+        <div class="mockup-row"><span class="mockup-label">Feedstock</span><span class="mockup-value">Mixed Industrial Waste</span></div>
+        <div class="mockup-row"><span class="mockup-label">Throughput</span><span class="mockup-value">48,000 tpa</span></div>
+        <div class="mockup-row"><span class="mockup-label">H₂ Output</span><span class="mockup-value green">3,200 kg/day</span></div>
+        <div class="mockup-row"><span class="mockup-label">SAF Yield</span><span class="mockup-value green">12M litres/yr</span></div>
+        <div class="mockup-row"><span class="mockup-label">EBITDA Margin</span><span class="mockup-value green">76%</span></div>
+        <div class="mockup-row"><span class="mockup-label">Payback Period</span><span class="mockup-value">5.2 years</span></div>
+        <div class="mockup-bar"><div class="mockup-bar-fill"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRUST BAR ========== -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner">
+      Trusted by <span>major energy companies</span>, <span>global FMCG consortiums</span>, and <span>sovereign infrastructure funds</span> across 4 continents.
+    </div>
+  </div>
+</section>
+
+<!-- ========== INTRO STRIP ========== -->
+<section class="intro-strip">
+  <div class="container">
+    <h2>Every waste stream has hidden value. We model it, prove it, and help you capture it.</h2>
+    <p>NZP's digital-first approach means you see the economics before you commit the capital. No speculative builds. No stranded assets. Just data-backed investment decisions.</p>
+  </div>
+</section>
+
+<!-- ========== PLATFORM ========== -->
+<section class="platform" id="how-it-works">
+  <div class="container">
+    <span class="section-label">Platform</span>
+    <h2 class="section-title">How the platform works</h2>
+    <p class="section-sub">Four steps from waste characterisation to bankable investment case.</p>
+    <div class="platform-grid" style="margin-top:48px;">
+      <div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Waste Characterisation</h3>
+            <p>We analyse your actual waste streams — composition, volume, variability — to build a precise feedstock profile unique to your site.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Digital Modelling</h3>
+            <p>Our proprietary engine simulates conversion pathways and outputs — hydrogen, SAF, syngas, power — using your real data, not generic assumptions.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Economic Analysis</h3>
+            <p>Full financial modelling: CAPEX, OPEX, revenue streams, payback periods, EBITDA projections — all site-specific and investor-ready.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Investment Decision</h3>
+            <p>You decide with confidence. The model proves the case before a single pound of capital is deployed. Model first, invest later.</p>
+          </div>
+        </div>
+      </div>
+      <div class="commercial-panel">
+        <h3>Commercial Summary</h3>
+        <div class="commercial-row"><span class="label">Typical Payback</span><span class="value">5–8 years</span></div>
+        <div class="commercial-row"><span class="label">EBITDA Margin</span><span class="value">Up to 76%</span></div>
+        <div class="commercial-row"><span class="label">Gate Fee Savings</span><span class="value">40–60%</span></div>
+        <div class="commercial-row"><span class="label">Carbon Credits</span><span class="value">Included</span></div>
+        <div class="commercial-row"><span class="label">Revenue Streams</span><span class="value">4–6 per site</span></div>
+        <div class="commercial-row"><span class="label">Offtake Partners</span><span class="value">Pre-arranged</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== OUTPUTS ========== -->
+<section class="outputs" id="outputs">
+  <div class="container">
+    <span class="section-label">Outputs</span>
+    <h2 class="section-title">What your waste could become</h2>
+    <p class="section-sub">High-value products from your existing waste streams, with offtake routes already mapped.</p>
+    <div class="outputs-grid">
+      <div class="output-card">
+        <div class="output-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5m-4.75-11.396c.251.023.501.05.75.082M12 21a8.966 8.966 0 005.982-2.275M12 21a8.966 8.966 0 01-5.982-2.275M12 21c.18 0 .359-.006.537-.016M12 21c-.18 0-.359-.006-.537-.016"/></svg>
+        </div>
+        <h3>Green Hydrogen</h3>
+        <p>Waste-derived hydrogen via advanced gasification. Competitive with electrolysis at a fraction of the water consumption.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+        </div>
+        <h3>Sustainable Aviation Fuel</h3>
+        <p>Fischer-Tropsch SAF from waste feedstocks. Meeting the aviation industry's mandate for sustainable fuel blends.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        </div>
+        <h3>Baseload Power</h3>
+        <p>Reliable, grid-ready electricity generated from syngas. Provides energy security independent of weather or time of day.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/><path d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z"/></svg>
+        </div>
+        <h3>Renewable Natural Gas</h3>
+        <p>Pipeline-quality biomethane from organic waste streams. Directly displaces fossil natural gas in existing infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PHASES ========== -->
+<section class="phases" id="phases">
+  <div class="container">
+    <span class="section-label">How We Work</span>
+    <h2 class="section-title">A phased approach that de-risks every step</h2>
+    <p class="section-sub">No big-bang deployments. We prove the case incrementally, so you commit capital only when the data supports it.</p>
+    <div class="phases-grid">
+      <div class="phase-card">
+        <div class="phase-num">Phase 1</div>
+        <h3>Digital Modelling</h3>
+        <p>We build a complete digital twin of your waste-to-value opportunity using your actual site data, feedstock composition, and local market conditions.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Phase 2</div>
+        <h3>Site Optimisation</h3>
+        <p>Engineering review, planning alignment, grid connection assessment, and logistics optimisation to ensure the model translates to reality.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Phase 3</div>
+        <h3>Stepwise Adoption</h3>
+        <p>Modular deployment starting with highest-value outputs. Each module is independently viable, reducing risk and accelerating first revenue.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Phase 4</div>
+        <h3>Full Offtake Delivery</h3>
+        <p>Complete operational facility with contracted offtake agreements, performance guarantees, and ongoing optimisation through our digital platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY THIS APPROACH ========== -->
+<section class="why" id="why-this-works">
+  <div class="container">
+    <span class="section-label">Why This Approach</span>
+    <h2 class="section-title">The old way vs. the NZP way</h2>
+    <p class="section-sub">Traditional waste-to-energy projects fail because they skip the modelling. We don't.</p>
+    <div class="why-grid">
+      <div class="why-box old">
+        <h3>The Traditional Approach</h3>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>Speculative CAPEX — build first, hope later</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>Generic assumptions instead of real site data</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>Single-output plants with no flexibility</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>Years to first revenue, if ever</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>No offtake certainty at point of investment</li>
+        </ul>
+      </div>
+      <div class="why-box new">
+        <h3>The NZP Approach</h3>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>Model first — prove the economics before committing capital</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>Your actual waste data drives every projection</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>Multi-output flexibility — hydrogen, SAF, power, RNG</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>Phased deployment — revenue from module one</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>Pre-arranged offtake with major energy partners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHO IT'S FOR ========== -->
+<section class="who" id="who-its-for">
+  <div class="container">
+    <span class="section-label">Who It's For</span>
+    <h2 class="section-title">Built for decision-makers who need certainty</h2>
+    <p class="section-sub">Whether you're managing waste, investing in infrastructure, or sourcing clean fuels — NZP gives you the data to move forward.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
+        </div>
+        <h3>Waste Producers &amp; Industrials</h3>
+        <p>Turn your largest cost centre into a revenue stream. See exactly what your waste is worth before committing to any technology.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>
+        </div>
+        <h3>Infrastructure Investors</h3>
+        <p>Bankable models with independently validated projections. De-risked investments with pre-arranged offtake and proven technology.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+        </div>
+        <h3>Energy Offtakers</h3>
+        <p>Secure long-term supply of green hydrogen, SAF, or renewable power. Our platform maps supply to your demand with contractual certainty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRACK RECORD ========== -->
+<section class="track" id="track-record">
+  <div class="container">
+    <span class="section-label">Track Record</span>
+    <h2 class="section-title">Proven at scale, validated independently</h2>
+    <p class="section-sub">Our technology partners have decades of operational history across hundreds of installations worldwide.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num">200+</div>
+        <div class="label">Systems Deployed</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">25+</div>
+        <div class="label">Years Operational History</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">10,000°C</div>
+        <div class="label">Plasma Arc Temperature</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">99.99%</div>
+        <div class="label">Destruction Efficiency</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5–8 yrs</div>
+        <div class="label">Typical Payback Period</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">76%</div>
+        <div class="label">Target EBITDA Margin</div>
+      </div>
+    </div>
+    <div class="validation-strip">
+      <div>
+        <h3>Independently validated by leading engineering firms</h3>
+      </div>
+      <div>
+        <p>All NZP models undergo independent technical and financial review. Our technology stack has been validated by major engineering consultancies and energy sector due-diligence teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INDEPENDENT VALIDATION ========== -->
+<section class="credibility" id="credibility">
+  <div class="container">
+    <span class="section-label section-label-light">Independent Validation</span>
+    <h2 class="section-title" style="color:#fff;">Why the market trusts NZP</h2>
+    <p class="section-sub" style="color:#94a3b8;">Every claim is backed by independent validation, operational data, and contracted partnerships.</p>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <h3>PFAS Destruction Certified</h3>
+        <p>99.99% destruction efficiency for PFAS "forever chemicals" — independently verified to meet the strictest regulatory standards.</p>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        </div>
+        <h3>Engineering Due Diligence</h3>
+        <p>Full technical review by independent engineering consultancies confirming process viability and output projections.</p>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 3.75c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+        </div>
+        <h3>Operational Track Record</h3>
+        <p>200+ systems deployed globally over 25+ years. Real operational data, not laboratory projections.</p>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+        </div>
+        <h3>Major Energy Partners</h3>
+        <p>Contracted offtake agreements with major energy offtake partners and global FMCG consortiums across multiple territories.</p>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5m-4.75-11.396c.251.023.501.05.75.082M12 21a8.966 8.966 0 005.982-2.275M12 21a8.966 8.966 0 01-5.982-2.275M12 21c.18 0 .359-.006.537-.016M12 21c-.18 0-.359-.006-.537-.016"/></svg>
+        </div>
+        <h3>Fischer-Tropsch &amp; Haber-Bosch</h3>
+        <p>Proven downstream conversion partners for SAF and ammonia production. Established industrial processes, not experimental tech.</p>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5a17.92 17.92 0 01-8.716-2.247m0 0A8.966 8.966 0 013 12c0-1.528.382-2.97 1.057-4.228"/></svg>
+        </div>
+        <h3>Global Deployment Ready</h3>
+        <p>Technology platform is jurisdiction-agnostic with deployments planned across Europe, Middle East, Asia, and North America.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TECHNOLOGY ========== -->
+<section class="technology" id="technology">
+  <div class="container">
+    <span class="section-label">The Technology</span>
+    <h2 class="section-title">Plasma gasification at 10,000°C</h2>
+    <p class="section-sub">Not incineration. Not pyrolysis. Plasma arc technology breaks waste down to its molecular components, enabling true resource recovery.</p>
+
+    <div class="temp-compare">
+      <div class="temp-card conventional">
+        <div class="temp">850°C</div>
+        <div class="desc">Conventional Incineration</div>
+        <p style="margin-top:12px;font-size:0.85rem;color:#92400e;">Partial combustion. Toxic ash. Limited outputs. Cannot destroy PFAS.</p>
+      </div>
+      <div class="temp-card plasma">
+        <div class="temp">10,000°C</div>
+        <div class="desc">NZP Plasma Gasification</div>
+        <p style="margin-top:12px;font-size:0.85rem;color:#0369a1;">Molecular dissociation. Zero toxic residue. Multiple high-value outputs. PFAS destruction.</p>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <h4>Feedstock Flexible</h4>
+        <p>Processes mixed waste, hazardous waste, clinical waste, plastics, tyres, and biomass — no pre-sorting required.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Zero Toxic Residue</h4>
+        <p>Vitrified slag is inert and can be used in construction. No toxic ash, no landfill burden.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Multi-Output</h4>
+        <p>Simultaneously produces syngas for hydrogen, SAF, power, and heat from a single feedstock stream.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Modular &amp; Scalable</h4>
+        <p>Units from 10,000 to 200,000+ tonnes per annum. Stack modules as demand grows.</p>
+      </div>
+    </div>
+
+    <div class="delivery-chain">
+      <h3>Delivery Chain — From Waste to Value</h3>
+      <div class="chain-steps">
+        <div class="chain-step">Waste In</div>
+        <span class="chain-arrow">&rarr;</span>
+        <div class="chain-step">Plasma Gasification</div>
+        <span class="chain-arrow">&rarr;</span>
+        <div class="chain-step">Syngas Cleaning</div>
+        <span class="chain-arrow">&rarr;</span>
+        <div class="chain-step">Fischer-Tropsch / Haber-Bosch</div>
+        <span class="chain-arrow">&rarr;</span>
+        <div class="chain-step">H₂ · SAF · Power · RNG</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMMERCIALS ========== -->
+<section class="commercials" id="commercials">
+  <div class="container">
+    <span class="section-label">Commercials</span>
+    <h2 class="section-title">A commercial moat built on fundamentals</h2>
+    <p class="section-sub">NZP's economics are driven by multiple revenue streams, contracted offtake, and regulatory tailwinds.</p>
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Multiple Revenue Streams</h3>
+        <p>Gate fees, product sales (H₂, SAF, power), carbon credits, and heat offtake — 4 to 6 independent revenue lines per site.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <h3>Contracted Offtake</h3>
+        <p>Pre-arranged agreements with major energy offtake partners. Revenue certainty before ground is broken.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+        </div>
+        <h3>Regulatory Tailwinds</h3>
+        <p>PFAS bans, landfill taxes, SAF mandates, and carbon pricing all drive demand toward advanced waste conversion.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+        </div>
+        <h3>IP &amp; Technology Lock-In</h3>
+        <p>Proprietary digital modelling platform combined with exclusive technology partnerships creates a defensible competitive position.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Ready to unlock the value in your waste?</h2>
+      <p>Book a demo to see how NZP's digital modelling platform can map the economics of your waste streams — before you invest a penny.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary" onclick="openCalendly(event)">Book a Demo &rarr;</a>
+        <a href="mailto:info@netzeroplatforms.com" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg width="200" height="44" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="2.8" fill="#0ea5e9"/>
+          <circle cx="22" cy="8" r="2.4" fill="#0284c7"/>
+          <circle cx="32" cy="11.4" r="2.4" fill="#0369a1"/>
+          <circle cx="36" cy="22" r="2.4" fill="#059669"/>
+          <circle cx="32" cy="32.6" r="2.4" fill="#10b981"/>
+          <circle cx="22" cy="36" r="2.4" fill="#34d399"/>
+          <circle cx="12" cy="32.6" r="2.4" fill="#6ee7b7"/>
+          <circle cx="8" cy="22" r="2.4" fill="#22d3ee"/>
+          <circle cx="12" cy="11.4" r="2.4" fill="#38bdf8"/>
+          <text x="46" y="20" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#fff">Net Zero Platforms</text>
+          <text x="46" y="32" font-family="Inter, sans-serif" font-size="6" font-weight="600" fill="#64748b" letter-spacing="1.2">WASTE TO VALUE TECHNOLOGY</text>
+        </svg>
+        <p>Unlocking the hidden value in waste streams through digital-first modelling and proven plasma gasification technology.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#outputs">Outputs</a></li>
+          <li><a href="#phases">How We Work</a></li>
+          <li><a href="#technology">Technology</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#why-this-works">Why NZP</a></li>
+          <li><a href="#who-its-for">Who It's For</a></li>
+          <li><a href="#track-record">Track Record</a></li>
+          <li><a href="#credibility">Validation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@netzeroplatforms.com">info@netzeroplatforms.com</a></li>
+          <li><a href="#" onclick="openCalendly(event)">Book a Demo</a></li>
+          <li><a href="#commercials">Commercials</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Net Zero Platforms. All rights reserved.</span>
+      <span>Waste to Value Technology &middot; Model First, Invest Later</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll for nav links & close mobile menu
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('nav').classList.remove('open');
+    }
+  });
+});
+
+// Nav background on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 10) {
+    nav.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
+  } else {
+    nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)';
+  }
+});
+</script>
+</body>
+</html>
