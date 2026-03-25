@@ -452,6 +452,13 @@ footer{background:var(--slate-900);border-top:1px solid rgba(255,255,255,.06);pa
   .screen-kpis{grid-template-columns:1fr 1fr}
 }
 </style>
+  <!-- Calendly popup widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <script>
+    var NZP_CALENDLY_URL = 'https://calendly.com/YOUR_CALENDLY_URL';
+    function openCalendly(e){ e.preventDefault(); Calendly.initPopupWidget({url: NZP_CALENDLY_URL}); }
+  </script>
 </head>
 <body>
 
@@ -496,7 +503,7 @@ footer{background:var(--slate-900);border-top:1px solid rgba(255,255,255,.06);pa
       </div>
     </div>
 
-    <a href="#cta" class="nav-cta">Book Demo →</a>
+    <a href="#" onclick="openCalendly(event)" class="nav-cta">Book Demo →</a>
     </div>
 </nav>
 
