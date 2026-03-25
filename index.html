@@ -44,6 +44,11 @@ html{scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--slate-700);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
 
 /* ───────────────────────── NAV ───────────────────────── */
+
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px;margin:0 auto;padding:0 24px;height:72px;}
+.nav-mobile-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;flex-shrink:0;}
+.nav-mobile-toggle span{display:block;width:24px;height:2px;background:#334155;border-radius:2px;}
+
 .nav{
   position:sticky;top:0;z-index:1000;
   background:rgba(255,255,255,0.95);
@@ -453,7 +458,7 @@ footer{background:var(--slate-900);border-top:1px solid rgba(255,255,255,.06);pa
 }
 
 
-/* ═══ MOBILE NAV FIX ═══ */
+/* ═══ MOBILE NAV FIX v3 ═══ */
 @media (max-width: 900px) {
   .nav-mobile-toggle {
     display: flex !important;
